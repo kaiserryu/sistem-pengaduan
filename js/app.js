@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    API_BASE_URL: 'https://script.google.com/macros/s/AKfycbwJUBtbpucSJs7WS-66oQgbkeqhnfwg1SfzTQizt-Xkx5qh-Sn8u0zRVSSl6plAQtIW/exec',
+    API_BASE_URL: 'https://script.google.com/macros/s/AKfycbyijl2R08kuQtgG6hAGTqyOJfzswe79wZDBqBPtY2PkDGjsk0AW0ocD5oepchFNxYfH/exec',
     // Jika menggunakan web app URL yang berbeda, ganti di atas
 };
 
