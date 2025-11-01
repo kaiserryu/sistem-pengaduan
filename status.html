@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cek Status - Sistem Pengaduan Online</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .status-container {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .status-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #667eea;
+        }
+        
+        .status-timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .status-step {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .status-step::before {
+            content: '';
+            position: absolute;
+            left: -1.5rem;
+            top: 0;
+            bottom: -2rem;
+            width: 2px;
+            background: #dee2e6;
+        }
+        
+        .status-step:last-child::before {
+            display: none;
+        }
+        
+        .step-icon {
+            position: absolute;
+            left: -2rem;
+            top: 0;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            background: #6c757d;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+        
+        .step-active .step-icon {
+            background: #28a745;
+        }
+        
+        .step-completed .step-icon {
+            background: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-shield-alt"></i> SISTEM PENGADUAN
+            </a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="status-container">
+                    <div class="text-center mb-4">
+                        <h1><i class="fas fa-search"></i> Cek Status Pengaduan</h1>
+                        <p class="lead">Masukkan nomor tiket untuk melacak status pengaduan Anda</p>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="input-group">
+                            <input type="text" class="form-control form-control-lg" 
+                                   id="ticketId" placeholder="Masukkan Nomor Tiket (contoh: TKT241215-0001)">
+                            <button class="btn btn-primary btn-lg" type="button" onclick="checkStatus()">
+                                <i class="fas fa-search"></i> Cek Status
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Status Result -->
+                    <div class="d-none" id="statusResult">
+                        <div class="status-card">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Informasi Tiket</h5>
+                                    <p><strong>Nomor Tiket:</strong> <span id="resultTicketId">-</span></p>
+                                    <p><strong>Status:</strong> <span id="resultStatus">-</span></p>
+                                    <p><strong>Tanggal Dibuat:</strong> <span id="resultDate">-</span></p>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Detail Pengaduan</h5>
+                                    <p><strong>Pelapor:</strong> <span id="resultReporter">-</span></p>
+                                    <p><strong>Jenis Kejadian:</strong> <span id="resultIncident">-</span></p>
+                                    <p><strong>Lokasi:</strong> <span id="resultLocation">-</span></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Timeline -->
+                        <div class="status-card">
+                            <h5 class="mb-4">Progress Pengaduan</h5>
+                            <div class="status-timeline" id="statusTimeline">
+                                <!-- Timeline akan diisi oleh JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Petugas Penanggung Jawab -->
+                        <div class="status-card d-none" id="officerSection">
+                            <h5>Petugas Penanggung Jawab</h5>
+                            <p><strong>Nama Petugas:</strong> <span id="officerName">-</span></p>
+                            <p><strong>Tanggal Respon Terakhir:</strong> <span id="lastResponse">-</span></p>
+                            <p><strong>Keterangan:</strong> <span id="officerNotes">-</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Loading -->
+                    <div class="text-center mt-4 d-none" id="loading">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-2">Memeriksa status...</p>
+                    </div>
+
+                    <!-- Error Message -->
+                    <div class="alert alert-danger d-none mt-4" id="errorMessage"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
